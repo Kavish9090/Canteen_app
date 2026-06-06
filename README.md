@@ -1,87 +1,66 @@
-# Canteen App 🍔
+# Canteen App
 
-[![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev/)
-[![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
-[![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev/)
+## Project Overview
+Canteen App is a Flutter-based mobile application designed to simplify food ordering in canteens. It provides separate interfaces for students to place orders and administrators to manage the menu and fulfillment process.
 
-**Canteen App** is a modern, full-stack mobile solution designed to digitalize canteen operations. It bridges the gap between students and canteen staff, reducing wait times and improving order management through real-time synchronization.
+## Features
 
----
+### Student Side
+- User authentication via Firebase
+- Digital menu with item categories
+- Cart management (Add/Remove items)
+- Real-time order status tracking
+- View past order history
 
-## 🌟 Features
+### Admin Side
+- Sales and order dashboard
+- Menu management (Add/Update/Delete items)
+- Order processing and status updates
+- Sales reports and analytics
 
-### 🎓 For Students
-- **🔐 Secure Access**: Seamless login and signup using Firebase Auth.
-- **🍕 Digital Menu**: Browse categorized food items with vivid images and real-time prices.
-- **🛒 Smart Cart**: Easily add/remove items and view a summarized bill before checking out.
-- **🕒 Order Tracking**: Get real-time updates on your order status (Pending → Preparing → Ready).
-- **📄 History**: Access a complete record of all your past orders and receipts.
+## Technologies Used
+- Flutter & Dart
+- Firebase (Authentication, Firestore, Storage)
+- Provider (State Management)
 
-### 🛠️ For Admin & Staff
-- **📊 Live Dashboard**: Monitor total daily sales and order volume at a glance.
-- **🍔 Menu Architect**: Real-time management of menu items (stock availability, pricing, images).
-- **📋 Kitchen Queue**: Manage incoming orders and update their status to notify students instantly.
-- **📈 Analytical Reports**: Detailed sales breakdowns and performance analytics.
-
----
-
-## 🚀 Technologies Used
-- **Frontend**: Flutter Framework (Dart)
-- **Backend**: Google Firebase (Firestore, Authentication, Storage)
-- **State Management**: Provider
-- **Local Config**: `google-services.json` (Android configuration)
-
----
-
-## 📂 Project Structure
+## Project Structure
 ```text
 canteen_app/
-├── android/          # Android platform-specific configurations
+├── android/          # Platform-specific Android files
 ├── lib/
-│   ├── models/       # Data blueprints (User, Menu, Order)
-│   ├── providers/    # App state and logic handlers
-│   ├── screens/      # All UI Screens (Login, Home, Admin Panel)
-│   ├── services/     # Firebase & Database integration logic
-│   ├── utils/        # Theme data, constants, and global config
-│   ├── widgets/      # Custom reusable UI components
-│   └── main.dart     # Entry point of the application
-├── pubspec.yaml      # All project dependencies
+│   ├── models/       # Data models
+│   ├── providers/    # State management
+│   ├── screens/      # UI Screens
+│   ├── services/     # Firebase integrations
+│   ├── utils/        # Constants and theme
+│   ├── widgets/      # Reusable components
+│   └── main.dart     # Entry point
+├── pubspec.yaml      # Dependencies
 └── README.md         # Documentation
 ```
 
----
-
-## 🛠️ Installation & Setup
-To run this project locally, follow these steps:
-
+## Steps to Run the Project
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/Kavish9090/Canteen_app.git
    ```
-2. **Navigate to project folder**:
-   ```bash
-   cd Canteen_app
-   ```
-3. **Install dependencies**:
+2. **Install dependencies**:
    ```bash
    flutter pub get
    ```
-4. **Firebase Setup**:
-   - Create a new project on the [Firebase Console](https://console.firebase.google.com/).
-   - Enable **Authentication** (Email/Password), **Firestore**, and **Storage**.
-   - Download the `google-services.json` and place it in `android/app/`.
-5. **Run the application**:
+3. **Firebase Setup**:
+   - Add your `google-services.json` in `android/app/`.
+   - Enable Authentication, Firestore, and Storage in Firebase Console.
+4. **Run the app**:
    ```bash
    flutter run
    ```
 
----
+## Future Improvements
+- Integration of digital payment gateways
+- Push notifications for order updates
+- QR code-based order validation
+- Dark mode support
 
-## 🔮 Future Roadmap
-- [ ] **UPI Payment**: Integrate Razorpay or Stripe for digital payments.
-- [ ] **Push Notifications**: Immediate alerts when an order is ready for pickup.
-- [ ] **Token System**: Auto-generation of QR-based tokens for order validation.
-- [ ] **Dark Mode**: A sleek interface for late-night study sessions.
-
-## ✍️ Author
-Designed & Developed with ❤️ by **Kavish**
+## Author
+**Kavish**
