@@ -1,6 +1,6 @@
-# canteen_app
+# Canteen App
 
-A new Flutter project.
+A new Flutter project for managing canteen orders.
 
 ## Getting Started
 
