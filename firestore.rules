@@ -1,0 +1,65 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if the user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Helper function to get user data from 'users' collection
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    // Helper function to check if user has a specific role
+    function hasRole(role) {
+      return isAuthenticated() && getUserData().role.lower() == role.lower();
+    }
+
+    function isStaff() {
+      return isAuthenticated() && (getUserData().role.lower() == 'staff' || getUserData().role.lower() == 'admin');
+    }
+
+    // Menu rules - Visible to everyone, only staff can edit
+    match /menu_items/{itemId} {
+      allow read: if true;
+      allow write: if isStaff();
+    }
+ 
+    // Orders rules
+    match /orders/{orderId} {
+      // Allow read/get if user is authenticated (Relaxed for debugging)
+      allow read: if isAuthenticated();
+      
+      allow create: if isAuthenticated() && (isStaff() || request.resource.data.userId == request.auth.uid);
+      
+      // Students can only update if it's their order and still 'Pending'
+      // Staff can update anything (status changes)
+      allow update: if isAuthenticated() && (isStaff() || (resource.data.userId == request.auth.uid && resource.data.status == 'Pending'));
+      
+      allow delete: if isStaff();
+    }
+ 
+    // Users rules - Everyone can read basic info, only owner can edit profile
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && request.auth.uid == userId;
+    }
+ 
+    // Token counter rules - Used during order placement
+    match /token_counters/{date} {
+      allow read, write: if isAuthenticated();
+    }
+ 
+    // Payments rules - Security audit trail
+    match /payments/{paymentId} {
+      // Staff can view all, students can view their own
+      allow read: if isStaff() || (isAuthenticated() && resource.data.userId == request.auth.uid);
+      // Ensure users can only create payment records for themselves
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+    }
+  }
+}
+
